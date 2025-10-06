@@ -25,6 +25,24 @@ export default function MarketReview() {
       date: "August 02, 2025",
       title: "Trading Rhythm & Patience",
       description: "Market rhythm is crucial. Not every day requires trading. Learning to wait for the right opportunities while maintaining discipline and patience."
+    },
+    {
+      id: "4",
+      date: "July 18, 2025",
+      title: "Market Volatility Analysis",
+      description: "Analyzing recent market volatility patterns and their implications for risk management strategies. Focus on diversification and position sizing."
+    },
+    {
+      id: "5",
+      date: "June 25, 2025",
+      title: "Tech Sector Outlook",
+      description: "Evaluating technology sector performance and growth potential. Monitoring key indicators including innovation cycles and valuation metrics."
+    },
+    {
+      id: "6",
+      date: "June 10, 2025",
+      title: "Commodity Price Trends",
+      description: "Tracking commodity price movements and their impact on inflation expectations. Special attention to energy and agricultural markets."
     }
   ];
 
@@ -46,18 +64,6 @@ export default function MarketReview() {
         />
       </div>
 
-      {/* Timeline Arrow - 在导航栏右边 */}
-      <div className="fixed z-10" style={{ top: '48px', left: '356px' }}>
-        <Image
-          src="/Timeline Arrow.svg?v=2"
-          alt="Timeline Arrow"
-          width={60}
-          height={400}
-          className="opacity-70"
-          style={{ mixBlendMode: 'multiply' }}
-        />
-      </div>
-
       {/* 顶部飘落的五朵花 */}
       <FallingFlowers />
 
@@ -65,7 +71,7 @@ export default function MarketReview() {
       <FixedFlower />
 
       {/* 主内容区域 */}
-      <main className="flex-1 min-h-screen flex items-start justify-center p-12" style={{ paddingTop: '161px' }}>
+      <main className="flex-1 min-h-screen flex items-start p-12" style={{ paddingTop: '161px', paddingLeft: '40px' }}>
         <div className="max-w-3xl w-full">
           {/* 动效时间线 */}
           <AnimatedTimeline
@@ -82,7 +88,7 @@ export default function MarketReview() {
               dateColor: '#8B7355',
             }}
             customEventRender={(event) => {
-              // 彩色主题数组
+              // 彩色主题数组（仅用于日期颜色）
               const colorThemes = [
                 { dot: '#8ca0a0', bg: '#a5d8ff' },
                 { dot: '#d8b4a0', bg: '#ffc9c9' },
@@ -97,7 +103,6 @@ export default function MarketReview() {
                   className="p-6 rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]"
                   style={{ 
                     backgroundColor: '#FEFDFB',
-                    borderLeft: `4px solid ${theme.bg}`,
                   }}
                 >
                   {/* 日期 */}

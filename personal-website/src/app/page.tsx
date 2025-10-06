@@ -30,6 +30,17 @@ export default function Home() {
       {/* 右下角固定旋转的花 */}
       <FixedFlower />
 
+      {/* 左下角岩点图片 */}
+      <div className="fixed z-10" style={{ bottom: '165px', left: '127px' }}>
+        <Image
+          src="/Rock.svg"
+          alt="Rock"
+          width={180}
+          height={180}
+          className="opacity-80"
+        />
+      </div>
+
       {/* 主内容区域 - 下移3cm(113px) */}
       <main className="flex-1 min-h-screen flex items-start justify-center p-12" style={{ paddingTop: '161px' }}>
         <div className="max-w-5xl w-full relative">

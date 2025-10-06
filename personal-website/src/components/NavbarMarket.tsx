@@ -1,8 +1,10 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function NavbarMarket() {
+  const pathname = usePathname();
 
   const navItems = [
     { 
@@ -35,21 +37,24 @@ export default function NavbarMarket() {
     <nav className="fixed left-6 h-screen w-64 p-12 flex flex-col gap-8" style={{ paddingTop: '161px' }}>
       {/* 导航链接 */}
       <div className="flex flex-col gap-6">
-        {navItems.map((item) => (
-          <Link
-            key={item.path}
-            href={item.path}
-            className="text-lg font-bold transition-all duration-300 hover:opacity-80 whitespace-nowrap px-3 py-1"
-            style={{ 
-              fontFamily: 'Virgil, Patrick Hand, cursive',
-              color: item.color,
-              backgroundColor: item.bgColor + '33',
-              borderRadius: '15px 20px 18px 22px',
-            }}
-          >
-            {item.name}
-          </Link>
-        ))}
+        {navItems.map((item) => {
+          const isActive = pathname === item.path;
+          return (
+            <Link
+              key={item.path}
+              href={item.path}
+              className={`${isActive ? 'text-2xl' : 'text-lg'} font-bold transition-all duration-300 hover:opacity-80 whitespace-nowrap px-3 py-1`}
+              style={{ 
+                fontFamily: 'Virgil, Patrick Hand, cursive',
+                color: isActive ? '#000000' : item.color,
+                backgroundColor: isActive ? item.bgColor + '80' : item.bgColor + '33',
+                borderRadius: '15px 20px 18px 22px',
+              }}
+            >
+              {item.name}
+            </Link>
+          );
+        })}
       </div>
     </nav>
   );
