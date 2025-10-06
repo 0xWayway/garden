@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+/* 加载 Virgil 手写字体 */
+@font-face {
+  font-family: 'Virgil';
+  src: url('/fonts/Virgil.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --background: #fcfaf6;
+  --foreground: #333333;
+  --font-virgil: 'Virgil', 'Patrick Hand', cursive;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: #fcfaf6 !important;
+  color: var(--foreground);
+  font-family: var(--font-virgil), 'Patrick Hand', cursive, sans-serif;
+}
