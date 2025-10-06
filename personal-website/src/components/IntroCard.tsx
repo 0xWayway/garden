@@ -9,11 +9,11 @@ export default function IntroCard() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className="w-full"
-      style={{ fontFamily: 'Virgil, Patrick Hand, cursive' }}
+      style={{ fontFamily: 'var(--font-kalam), Kalam, cursive' }}
     >
       <div className="space-y-4">
-        <div className="text-[#333333] space-y-4 leading-relaxed text-base">
-          <p>
+        <div className="text-[#333333] space-y-4 leading-relaxed text-lg">
+          <p className="-mt-2 mb-1">
             Hello, I&apos;m Lucky
           </p>
           

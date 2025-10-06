@@ -26,4 +26,32 @@ body {
   background: #fcfaf6 !important;
   color: var(--foreground);
   font-family: var(--font-virgil), 'Patrick Hand', cursive, sans-serif;
+  /* 自定义鼠标图标 */
+  cursor: url('/Mouse.svg') 16 16, auto;
+}
+
+/* 可点击元素的鼠标样式 */
+a, button, [role="button"], input[type="button"], input[type="submit"] {
+  cursor: url('/Mouse.svg') 16 16, pointer;
+}
+
+/* 确保图片也使用自定义鼠标 */
+img {
+  cursor: url('/Mouse.svg') 16 16, auto;
+}
+
+/* 淡入动画 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out;
 }

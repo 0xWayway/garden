@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import SocialLinks from './SocialLinks';
 
 export default function PhotoCard() {
   return (
@@ -9,11 +10,11 @@ export default function PhotoCard() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-      className="p-4 w-64"
+      className="w-64 -mt-10"
       style={{ fontFamily: 'Virgil, Patrick Hand, cursive' }}
     >
       {/* 照片容器 */}
-      <div className="relative w-full aspect-square rounded-xl overflow-hidden">
+      <div className="relative w-full aspect-square rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.08)]">
         <Image
           src="/profile.jpg"
           alt="Lucky's photo"
@@ -23,6 +24,9 @@ export default function PhotoCard() {
           style={{ mixBlendMode: 'multiply' }}
         />
       </div>
+
+      {/* 社交媒体链接 */}
+      <SocialLinks />
     </motion.div>
   );
 }

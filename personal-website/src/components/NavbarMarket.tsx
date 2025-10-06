@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-export default function Navbar() {
+export default function NavbarMarket() {
 
   const navItems = [
     { 
@@ -32,14 +32,14 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed left-16 h-screen w-64 p-12 flex flex-col gap-8" style={{ paddingTop: '161px' }}>
+    <nav className="fixed left-6 h-screen w-64 p-12 flex flex-col gap-8" style={{ paddingTop: '161px' }}>
       {/* 导航链接 */}
       <div className="flex flex-col gap-6">
         {navItems.map((item) => (
           <Link
             key={item.path}
             href={item.path}
-            className="text-2xl font-bold transition-all duration-300 hover:opacity-80 whitespace-nowrap px-3 py-1"
+            className="text-lg font-bold transition-all duration-300 hover:opacity-80 whitespace-nowrap px-3 py-1"
             style={{ 
               fontFamily: 'Virgil, Patrick Hand, cursive',
               color: item.color,
