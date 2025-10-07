@@ -7,6 +7,15 @@ export async function GET(request: NextRequest) {
     const secret = searchParams.get('secret');
     const path = searchParams.get('path') || '/';
 
+    // 如果没有提供 secret 参数，返回 API 状态信息
+    if (!secret) {
+      return NextResponse.json({ 
+        message: 'Revalidation API is working',
+        timestamp: new Date().toISOString(),
+        note: 'Add ?secret=your_secret to revalidate paths'
+      });
+    }
+
     // 验证密钥
     if (secret !== process.env.REVALIDATION_SECRET) {
       return NextResponse.json({ message: 'Invalid secret' }, { status: 401 });
