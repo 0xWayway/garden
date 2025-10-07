@@ -49,12 +49,12 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   const fillDelay = activeIndex !== null ? Math.max(0, (index - 1) * 0.1) : 0;
   const fillDuration = activeIndex !== null ? Math.max(0.2, 0.5 - index * 0.1) : 0.5;
 
-  // 彩色主题数组
+  // 黑灰主题数组
   const colorThemes = [
-    { dot: '#8ca0a0', bg: '#a5d8ff' },
-    { dot: '#d8b4a0', bg: '#ffc9c9' },
-    { dot: '#6f7c58', bg: '#b2f2bb' },
-    { dot: '#9eb4b3', bg: '#d0bfff' },
+    { dot: '#1a1a1a', bg: '#4a4a4a' },
+    { dot: '#333333', bg: '#666666' },
+    { dot: '#1a1a1a', bg: '#4a4a4a' },
+    { dot: '#333333', bg: '#666666' },
   ];
   
   const currentTheme = colorThemes[index % colorThemes.length];

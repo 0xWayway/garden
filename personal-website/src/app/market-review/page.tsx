@@ -1,13 +1,17 @@
-'use client';
-
 import NavbarMarket from '@/components/NavbarMarket';
 import FixedFlower from '@/components/FixedFlower';
-import FallingFlowers from '@/components/FallingFlowers';
 import { AnimatedTimeline, TimelineEvent } from '@/components/AnimatedTimeline';
 import Image from 'next/image';
+import { getMarketReview } from '@/lib/notion';
 
-export default function MarketReview() {
-  const timelineEvents: TimelineEvent[] = [
+export const dynamic = 'force-dynamic';
+
+export default async function MarketReview() {
+  // 获取Notion数据
+  const notionEvents = await getMarketReview();
+  
+  // 默认数据作为后备
+  const defaultEvents: TimelineEvent[] = [
     {
       id: "1",
       date: "October 06, 2025",
@@ -46,6 +50,8 @@ export default function MarketReview() {
     }
   ];
 
+  const timelineEvents = notionEvents.length > 0 ? notionEvents : defaultEvents;
+
   return (
     <div className="min-h-screen relative flex" style={{ backgroundColor: '#fcfaf6' }}>
       {/* 左侧导航栏 - 使用Market专用导航 */}
@@ -64,14 +70,11 @@ export default function MarketReview() {
         />
       </div>
 
-      {/* 顶部飘落的五朵花 */}
-      <FallingFlowers />
-
       {/* 右下角固定旋转的花 */}
       <FixedFlower />
 
       {/* 主内容区域 */}
-      <main className="flex-1 min-h-screen flex items-start p-12" style={{ paddingTop: '161px', paddingLeft: '40px' }}>
+      <main className="flex-1 min-h-screen flex items-start p-12" style={{ paddingTop: '85px', paddingLeft: '40px' }}>
         <div className="max-w-3xl w-full">
           {/* 动效时间线 */}
           <AnimatedTimeline
@@ -87,53 +90,6 @@ export default function MarketReview() {
               descriptionColor: '#555555',
               dateColor: '#8B7355',
             }}
-            customEventRender={(event) => {
-              // 彩色主题数组（仅用于日期颜色）
-              const colorThemes = [
-                { dot: '#8ca0a0', bg: '#a5d8ff' },
-                { dot: '#d8b4a0', bg: '#ffc9c9' },
-                { dot: '#6f7c58', bg: '#b2f2bb' },
-                { dot: '#9eb4b3', bg: '#d0bfff' },
-              ];
-              const eventIndex = parseInt(event.id) - 1;
-              const theme = colorThemes[eventIndex % colorThemes.length];
-              
-              return (
-                <div 
-                  className="p-6 rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]"
-                  style={{ 
-                    backgroundColor: '#FEFDFB',
-                  }}
-                >
-                  {/* 日期 */}
-                  <div 
-                    className="text-sm mb-3"
-                    style={{ 
-                      fontFamily: 'var(--font-kalam), Kalam, cursive',
-                      color: theme.dot
-                    }}
-                  >
-                    {event.date}
-                  </div>
-                  
-                  {/* 标题 */}
-                  <h3 
-                    className="text-xl font-bold mb-3 text-[#333333]"
-                    style={{ fontFamily: 'var(--font-kalam), Kalam, cursive' }}
-                  >
-                    {event.title}
-                  </h3>
-                  
-                  {/* 描述 */}
-                  <p 
-                    className="text-base leading-relaxed text-[#555555]"
-                    style={{ fontFamily: 'var(--font-kalam), Kalam, cursive' }}
-                  >
-                    {event.description}
-                  </p>
-                </div>
-              );
-            }}
           />
 
           {/* 添加提示文字 */}
@@ -148,4 +104,3 @@ export default function MarketReview() {
     </div>
   );
 }
-

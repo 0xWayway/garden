@@ -2,9 +2,16 @@ import NavbarMarket from '@/components/NavbarMarket';
 import FixedFlower from '@/components/FixedFlower';
 import FallingFlowers from '@/components/FallingFlowers';
 import Image from 'next/image';
+import { getRecentThoughts } from '@/lib/notion';
 
-export default function RecentThoughts() {
-  const sections = [
+export const dynamic = 'force-dynamic';
+
+export default async function RecentThoughts() {
+  // 获取Notion数据
+  const notionSections = await getRecentThoughts();
+  
+  // 默认数据作为后备
+  const defaultSections = [
     {
       title: "what am I reading",
       items: [
@@ -35,6 +42,8 @@ export default function RecentThoughts() {
     }
   ];
 
+  const sections = notionSections.length > 0 ? notionSections : defaultSections;
+
   return (
     <div className="min-h-screen relative flex" style={{ backgroundColor: '#fcfaf6' }}>
       {/* 左侧导航栏 */}
@@ -60,7 +69,7 @@ export default function RecentThoughts() {
       <FixedFlower />
 
       {/* 主内容区域 */}
-      <main className="flex-1 min-h-screen flex items-start justify-center p-12" style={{ paddingTop: '161px' }}>
+      <main className="flex-1 min-h-screen flex items-start justify-center p-12" style={{ paddingTop: '85px' }}>
         <div className="max-w-3xl w-full">
           <div className="space-y-8">
             {sections.map((section, index) => (
@@ -101,4 +110,3 @@ export default function RecentThoughts() {
     </div>
   );
 }
-

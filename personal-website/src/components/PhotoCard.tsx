@@ -4,7 +4,16 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import SocialLinks from './SocialLinks';
 
-export default function PhotoCard() {
+interface PhotoCardProps {
+  photoUrl?: string;
+  socialLinks?: Array<{
+    platform: string;
+    url: string;
+    order: number;
+  }>;
+}
+
+export default function PhotoCard({ photoUrl, socialLinks }: PhotoCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -16,7 +25,7 @@ export default function PhotoCard() {
       {/* 照片容器 */}
       <div className="relative w-full aspect-square rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.08)]">
         <Image
-          src="/profile.jpg"
+          src={photoUrl || "/profile.jpg"}
           alt="Lucky's photo"
           fill
           className="object-cover opacity-85"
@@ -26,7 +35,7 @@ export default function PhotoCard() {
       </div>
 
       {/* 社交媒体链接 */}
-      <SocialLinks />
+      <SocialLinks links={socialLinks} />
     </motion.div>
   );
 }

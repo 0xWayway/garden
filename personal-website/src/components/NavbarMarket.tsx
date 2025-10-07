@@ -34,7 +34,7 @@ export default function NavbarMarket() {
   ];
 
   return (
-    <nav className="fixed left-6 h-screen w-64 p-12 flex flex-col gap-8" style={{ paddingTop: '161px' }}>
+    <nav className="fixed h-screen w-64 p-12 flex flex-col gap-8" style={{ left: '14px', paddingTop: '161px' }}>
       {/* 导航链接 */}
       <div className="flex flex-col gap-6">
         {navItems.map((item) => {
@@ -43,7 +43,7 @@ export default function NavbarMarket() {
             <Link
               key={item.path}
               href={item.path}
-              className={`${isActive ? 'text-2xl' : 'text-lg'} font-bold transition-all duration-300 hover:opacity-80 whitespace-nowrap px-3 py-1`}
+              className={`${isActive ? 'text-xl' : 'text-base'} font-bold transition-all duration-300 hover:opacity-80 whitespace-nowrap px-3 py-1`}
               style={{ 
                 fontFamily: 'Virgil, Patrick Hand, cursive',
                 color: isActive ? '#000000' : item.color,

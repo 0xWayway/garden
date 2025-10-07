@@ -4,8 +4,19 @@ import PhotoCard from '@/components/PhotoCard';
 import FallingFlowers from '@/components/FallingFlowers';
 import FixedFlower from '@/components/FixedFlower';
 import Image from 'next/image';
+import { getSiteConfig, getSocialLinks } from '@/lib/notion';
 
-export default function Home() {
+export const dynamic = 'force-dynamic';
+
+export default async function Home() {
+  // 获取Notion数据
+  const [siteConfig, socialLinks] = await Promise.all([
+    getSiteConfig(),
+    getSocialLinks(),
+  ]);
+
+  const introText = siteConfig.intro || '';
+  const photoUrl = siteConfig.photo_url || '';
   return (
     <div className="min-h-screen relative flex" style={{ backgroundColor: '#fcfaf6' }}>
       {/* 左侧导航栏（已向右移动 64px） */}
@@ -31,7 +42,7 @@ export default function Home() {
       <FixedFlower />
 
       {/* 左下角岩点图片 */}
-      <div className="fixed z-10" style={{ bottom: '165px', left: '127px' }}>
+      <div className="fixed z-10" style={{ bottom: '108px', left: '127px' }}>
         <Image
           src="/Rock.svg"
           alt="Rock"
@@ -48,12 +59,12 @@ export default function Home() {
           <div className="flex gap-8 items-start justify-center">
             {/* 自我介绍卡片 */}
             <div className="flex-1 max-w-md">
-              <IntroCard />
+              <IntroCard introText={introText} />
             </div>
 
             {/* 照片卡片 */}
             <div className="flex-shrink-0">
-              <PhotoCard />
+              <PhotoCard photoUrl={photoUrl} socialLinks={socialLinks} />
             </div>
           </div>
 
