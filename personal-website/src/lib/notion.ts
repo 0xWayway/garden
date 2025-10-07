@@ -64,13 +64,22 @@ async function queryDatabase(
       }
     });
 
-    // 过滤出属于指定数据库的页面
-    const pages = response.results.filter((page: any) => 
-      (page.parent?.database_id === databaseId || 
-       page.parent?.data_source_id === databaseId) && 
-      page.object === 'page' && 
-      'properties' in page
-    );
+        // 过滤出属于指定数据库的页面
+        const pages = response.results.filter((page: any) => {
+          const parentDbId = page.parent?.database_id;
+          const parentDataSourceId = page.parent?.data_source_id;
+          
+          // 检查是否匹配数据库ID（支持两种格式）
+          const matchesDbId = parentDbId === databaseId || parentDataSourceId === databaseId;
+          
+          // 也检查数据库ID的完整格式（带连字符）
+          const dbIdWithDashes = databaseId.replace(/(.{8})(.{4})(.{4})(.{4})(.{12})/, '$1-$2-$3-$4-$5');
+          const matchesDbIdFormatted = parentDbId === dbIdWithDashes || parentDataSourceId === dbIdWithDashes;
+          
+          return (matchesDbId || matchesDbIdFormatted) && 
+                 page.object === 'page' && 
+                 'properties' in page;
+        });
 
     return pages;
   } catch (error) {
