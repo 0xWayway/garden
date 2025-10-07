@@ -57,7 +57,7 @@ Or if you just want to chat — you're very welcome :)
                     <span key={partIndex}>
                       {part}
                       {partIndex === 0 && (
-                        <strong className="font-bold">let's catch up!</strong>
+                        <strong className="font-bold">let&apos;s catch up!</strong>
                       )}
                     </span>
                   ))}

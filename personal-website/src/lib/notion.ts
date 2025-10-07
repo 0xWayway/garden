@@ -18,6 +18,18 @@ type QueryDatabaseOptions = {
   sorts?: Array<Record<string, unknown>>;
 };
 
+// 定义 Notion 页面的基础类型
+interface NotionPage {
+  id: string;
+  object: string;
+  parent?: {
+    database_id?: string;
+    data_source_id?: string;
+    [key: string]: any;
+  };
+  properties?: Record<string, any>;
+}
+
 const getTextFromRichText = (segments: Array<{ plain_text: string }> | undefined) => {
   if (!segments || segments.length === 0) {
     return '';
@@ -55,7 +67,7 @@ async function queryDatabase(
     // 过滤出属于指定数据库的页面
     const pages = response.results.filter((page: any) => 
       (page.parent?.database_id === databaseId || 
-       page.parent?.data_source_id) && 
+       page.parent?.data_source_id === databaseId) && 
       page.object === 'page' && 
       'properties' in page
     );
@@ -118,7 +130,7 @@ export async function getRecentThoughts() {
   });
 
   return pages
-    .map((page: any) => {
+    .map((page: NotionPage) => {
       const category = getTextFromTitle(page.properties?.Category?.title);
       const itemsText = getTextFromRichText(page.properties?.Items?.rich_text);
       const items = itemsText
@@ -156,7 +168,7 @@ export async function getMarketReview() {
   };
 
   return pages
-    .map((page: any) => {
+    .map((page: NotionPage) => {
       const date = page.properties?.Date?.date?.start || '';
       const title = getTextFromTitle(page.properties?.Title?.title);
       const description = getTextFromRichText(page.properties?.Description?.rich_text);
